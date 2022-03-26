@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link href="{% static 'css/dashhome.css' %}" rel="stylesheet" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+</head>
+<body >
+    <nav>
+        <div>KEA BEIT 4.2 Delivery 1</div>
+        <div>DASHBOARD</div>
+        <div><a href="/required"><u>required plots</u></a> - <a href="/admin">ADMIN</a> - <a href="https://github.com/dissingjan/dashboard_kea4.2-d1">GITHUB</a></div>
+    </nav>
+    <div id="container">
+        <p>PLEASE USE LANDSCAPE MODE</p>
+    </div>
+    <div id="wrapper">
+        <div class="topdash">
+            <div class="card">
+                <table>
+                    <caption>Top Selling Employees</caption>
+                    {% for i in best_emp|slice:":3" %}
+                    <tr>
+                        <td>{{ i.fullname }}</td>
+                        <td>${{ i.total_sale }}k</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="card">
+                <table>
+                    <caption>Top Buying Customers</caption>
+                    {% for i in best_cust|slice:":3" %}
+                    <tr>
+                        <td>{{ i.id_and_name }}</td>
+                        <td>{{ i.country }}</td>
+                        <td>${{ i.total_sale }}k</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="card">
+                <table>
+                    {% for i in prod_order_cust_emp|slice:":1" %}
+                    <caption>Last Purchase:  {{ i.orderdate }}</caption>
+                    <tr>
+                        <td>{{ i.quantity }} x {{ i.productname }} ({{ i.type }})</td>
+                    </tr>
+                    <tr>
+                        <td>From {{ i.country }} by {{ i.first_name }} {{ i.last_name }}</td>
+                    </tr>
+                    <tr></tr>
+                        <td>Total Price: ${{ i.sale|floatformat:2 }}</td>
+                    </tr>
+                    
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="seconddash">
+            <div class="card text">
+                <table>
+                    <caption>Yearly Sales</caption>
+                    {% for i in order_totals_year|dictsortreversed:"year"|slice:":4" %}
+                    <tr>
+                        <td>{{ i.year }}: ${{ i.total_sale }} billion</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% if order_totals_year_fig_div %}
+            <div class="card" id="biggraph">
+                {{ order_totals_year_fig_div|safe }}
+            </div>
+            {% endif %}
+
+            {% if order_totals_year_fig_small_div %}
+            <div class="card" id="smallgraph1">
+                {{ order_totals_year_fig_small_div|safe }}
+            </div>
+            {% endif %}
+            {% if pie_cust_fig_div %}
+            <div class="card" id="biggraph">
+                {{ pie_cust_fig_div|safe }}
+            </div>
+            {% endif %}
+            {% if pie_cust_fig_small_div %}
+            <div class="card" id="smallgraph2">
+                {{ pie_cust_fig_small_div|safe }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="graphdash">
+            {% if scatter_sales_div %}
+            <div class="biggraph">
+            {{ scatter_sales_div|safe }}
+            </div>
+            {% endif %}
+            {% if prod_stock_fig_div %}
+            <div class="biggraph">
+            {{ prod_stock_fig_div|safe }}
+            </div>
+            {% endif %}
+            <!-- {% if prod_type_fig_div %}
+            <div>
+            {{ prod_type_fig_div|safe }}
+            </div>
+            {% endif %} -->
+            
+        </div>
+    </div>    
+    <footer><p>GROUP208</p></footer>
+</body>
+</html>

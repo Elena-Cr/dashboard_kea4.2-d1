@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD</title>
+    <link href="{% static 'css/dashhome.css' %}" rel="stylesheet" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+</head>
+<body >
+    <nav>
+        <div>KEA BEIT 4.2 Delivery 1</div>
+        <div><a href="/">DASHBOARD</a></div>
+        <div><a href="/required"><u>required plots</u></a> - <a href="/admin">ADMIN</a> - <a href="https://github.com/dissingjan/dashboard_kea4.2-d1">GITHUB</a></div>
+    </nav>
+    <div id="container">
+        <p>PLEASE USE LANDSCAPE MODE</p>
+    </div>
+    <div id="wrapper">
+             {% if best_emp_fig_div %}
+            <div class="biggraph">
+            {{ best_emp_fig_div|safe }}
+            </div>
+            {% endif %}
+            {% if prod_order_fig_div %}
+            <div class="biggraph">
+            {{ prod_order_fig_div|safe }}
+            </div>
+            {% endif %}
+            
+        </div>
+    </div>    
+    <footer><p>GROUP208</p></footer>
+</body>
+</html>
