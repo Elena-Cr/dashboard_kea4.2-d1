@@ -13,9 +13,11 @@
 
  3- Create virtual environment and install requirements.txt
 
- 4- create superuser on django-admin
+ 4- create superuser on django-admin, setup django, collect static, 
 
  5- run pop_database from scripts_and_files
+
+ 6- you can do run syncdb and generate models from the already populated database. run django makemigrations and migrate. 
 
  6- configure nginx and gunicorn on server (maybe u can skip this step if u run on localhost)
 
